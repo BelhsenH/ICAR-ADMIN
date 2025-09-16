@@ -1,0 +1,200 @@
+<div *ngIf="paymentTransaction" class="card ">
+  <div class="grid">
+    <div class="col-4">
+      <h5>Payment Transaction information</h5>
+
+      <ul class="list-none p-0 m-0">
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">ID</div>
+          <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.id }}</div>
+
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Transaction Date</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ moment(paymentTransaction.transactionDate)!.format('LL') }}
+          </div>
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Amount</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.amount }}
+          </div>
+
+        </li>
+        <li *ngIf="paymentTransaction.description"
+            class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Description</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.description }}
+          </div>
+
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="grid">
+            <div class="col-5 text-500 w-3 md:w-3 font-medium">Transaction's user Id</div>
+            <div
+              class="col-7 text-900 w-full md:w-9 md:flex-order-0 flex-order-1">{{ paymentTransaction.user.id }}
+              <button style="top: 0.6rem;margin-left: 2rem;width:3.5rem!important;" pButton pRipple
+                      icon="pi pi-info-circle"
+                      pTooltip="View user details"
+                      class="p-button-rounded p-button-success mr-2"
+                      (click)="goToUserDetails(paymentTransaction.user.id)"></button>
+            </div>
+
+          </div>
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="grid">
+            <div class="col-5 text-500 w-3 md:w-3 font-medium">Transaction's booking Id</div>
+            <div
+              class="col-7 text-900 w-full md:w-9 md:flex-order-0 flex-order-1">{{ paymentTransaction.bookingId }}
+              <button style="top: 0.6rem;margin-left: 2rem;width:3.5rem!important;" pButton pRipple
+                      icon="pi pi-info-circle"
+                      pTooltip="View booking details"
+                      class="p-button-rounded p-button-success mr-2"
+                      (click)="goToBookingDetails(paymentTransaction.bookingId)"></button>
+            </div>
+
+          </div>
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Payment method types</div>
+          <div *ngFor="let type of paymentTransaction.paymentMethodTypes "
+               class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ type }}
+          </div>
+
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Transfer Group</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.transferGroup }}
+          </div>
+
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Receipt Url</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1"><a [href]=paymentTransaction.receiptUrl>Click
+            here</a></div>
+
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="paymentTransaction.card" class="col-4">
+      <div class="surface-section">
+        <h5>Card Information</h5>
+        <ul class="list-none p-0 m-0">
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Brand</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.card.brand }}
+            </div>
+
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Last 4</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.card.last4 }}
+            </div>
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Expiration month</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.card.expMonth }}
+            </div>
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Expiration year</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.card.expYear }}
+            </div>
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Country</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.card.country }}
+            </div>
+
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Description</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.card.description }}
+            </div>
+
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Address Line1 Check</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.card.addressLine1Check }}
+            </div>
+
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Address Postal Code Check</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.card.addressPostalCodeCheck }}
+            </div>
+
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Cvc Check</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.card.cvcCheck }}
+            </div>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="paymentTransaction.invoice" class="col-4">
+      <h5>Invoice information</h5>
+
+      <ul class="list-none p-0 m-0">
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">ID</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.invoice.id }}
+          </div>
+
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Number Num</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.invoice.information.numberNum }}
+          </div>
+
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Creation Date</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ moment(paymentTransaction.invoice.createdAt)!.format('LL') }}
+          </div>
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Amount</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.invoice.amount }}
+          </div>
+
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Currency</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.invoice.currency }}
+          </div>
+
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">FileName</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ paymentTransaction.invoice.fileName }}
+          </div>
+
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,24 @@
+import {HttpParams} from '@angular/common/http';
+import {Pagination} from "../../models/api-request/pagination/pagination.model";
+
+export const createRequestOption = (req?: Pagination): HttpParams => {
+
+  let options: HttpParams = new HttpParams();
+
+  if (req) {
+    Object.keys(req).forEach(key => {
+      if (key !== 'sort') {
+        // @ts-ignore
+        options = options.set(key, req[key]);
+      }
+    });
+
+    if (req.sort) {
+      req.sort.forEach((val: string) => {
+        options = options.append('sort', val);
+      });
+    }
+  }
+
+  return options;
+};

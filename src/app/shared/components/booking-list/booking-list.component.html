@@ -1,0 +1,57 @@
+<div class="surface-section">
+  <!--
+      <div class="font-medium text-3xl text-900 mb-3">Offer's bookings</div>
+  -->
+  <ul *ngFor="let booking of bookings" class="list-none p-0 m-0">
+    <div style="border: 0.2rem solid darkgray;border-radius: 0.5rem; margin-bottom: 0.4rem;">
+      <div class="grid">
+        <div class="col-5">
+
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Reference</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ booking.reference }}
+            </div>
+
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Departure City</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+              {{ booking.departureCity.name }}, {{ booking.departureCity.countryCode }}
+            </div>
+
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Arrival City</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+              {{ booking.arrivalCity.name }}, {{ booking.arrivalCity.countryCode }}
+            </div>
+
+          </li>
+        </div>
+        <div class="col-5">
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Start date</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ booking.startDate | formatFullDate | async }}
+            </div>
+
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Booking Status</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ booking.status }}
+            </div>
+
+          </li>
+        </div>
+        <div class="col-2">
+          <button style="margin-top: 1rem;" pButton pRipple icon="pi pi-info-circle"
+                  pTooltip="View booking details"
+                  class="p-button-rounded p-button-success ml-2"
+                  (click)="goToBookingDetails(booking.id)"></button>
+        </div>
+      </div>
+    </div>
+  </ul>
+</div>

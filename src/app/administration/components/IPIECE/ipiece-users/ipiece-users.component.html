@@ -1,0 +1,163 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card px-6 py-6">
+      <p-toast></p-toast>
+      <p-table #dt [value]="users" [columns]="cols" responsiveLayout="scroll" [rows]="10"
+               [globalFilterFields]="['nomBoutiqueSociete', 'nomGerant', 'adresse','email','phoneNumber']"
+               [paginator]="true"
+               [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+               [(selection)]="selectedUsers"
+               selectionMode="multiple" [rowHover]="true" dataKey="_id">
+        <ng-template pTemplate="caption">
+          <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+            <h5 class="m-0">Manage Users</h5>
+            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                          <span class="block mt-2 mb-3 ml-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."
+                                   class="w-full sm:w-auto"/>
+                        </span>
+                        </span>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="nomBoutiqueSociete">Nom Boutique/Société
+              <p-sortIcon field="nomBoutiqueSociete"></p-sortIcon>
+            </th>
+            <th pSortableColumn="nomGerant">Nom Gérant
+              <p-sortIcon field="nomGerant"></p-sortIcon>
+            </th>
+            <th pSortableColumn="adresse">Adresse
+              <p-sortIcon field="adresse"></p-sortIcon>
+            </th>
+            <th pSortableColumn="phoneNumber">Téléphone
+              <p-sortIcon field="phoneNumber"></p-sortIcon>
+            </th>
+            <th pSortableColumn="email">Email
+              <p-sortIcon field="email"></p-sortIcon>
+            </th>
+            <th pSortableColumn="type">Type
+              <p-sortIcon field="type"></p-sortIcon>
+            </th>
+            <th pSortableColumn="verified">Vérifié
+              <p-sortIcon field="verified"></p-sortIcon>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+
+        <ng-template #tableBody pTemplate="body" let-user>
+          <tr>
+            <td>{{ user.nomBoutiqueSociete }}</td>
+            <td>{{ user.nomGerant }}</td>
+            <td>{{ user.adresse }}</td>
+            <td>{{ user.phoneNumber }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.type }}</td>
+            <td>{{ user.verified ? 'Oui' : 'Non' }}</td>
+            <td>
+              <div class="flex justify-content-center">
+                <p-menu #menu [model]="items" [popup]="true" appendTo="body"></p-menu>
+                <button pButton pRipple
+                        (click)="updateSelectedUser(user); updateMenuItems(user); menu.toggle($event)"
+                        icon="pi pi-ellipsis-h" class="p-button-rounded p-button-success"></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <p-dialog [(visible)]="userDialog" [style]="{width: '70%'}" header="Détails Utilisateur" [modal]="true"
+              class="p-fluid">
+      <ng-template pTemplate="content">
+        <div class="field" *ngIf="user?.type">
+          <label>Type</label>
+          <input type="text" pInputText [(ngModel)]="user.type" readonly/>
+        </div>
+
+
+        <div class="field" *ngIf="user?.nomBoutiqueSociete">
+          <label>Nom Boutique/Société</label>
+          <input type="text" pInputText [(ngModel)]="user.nomBoutiqueSociete" readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.nomGerant">
+          <label>Nom Gérant</label>
+          <input type="text" pInputText [(ngModel)]="user.nomGerant" readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.adresse">
+          <label>Adresse</label>
+          <input type="text" pInputText [(ngModel)]="user.adresse" readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.geolocation">
+          <label>Géolocalisation</label>
+          <input type="text" pInputText
+                 [value]="'Lat: ' + (user?.geolocation?.lat ?? '') + ', Lng: ' + (user?.geolocation?.lng ?? '')"
+                 readonly/>
+        </div>
+        <div class="field" *ngIf="user?.zoneGeoCouverte">
+          <label>Zone Géographique</label>
+          <input type="text" pInputText [(ngModel)]="user.zoneGeoCouverte" readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.phoneNumber">
+          <label>Téléphone</label>
+          <input type="text" pInputText [(ngModel)]="user.phoneNumber" readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.email">
+          <label>Email</label>
+          <input type="text" pInputText [(ngModel)]="user.email" readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.typesPieces?.length">
+          <label>Types de pièces</label>
+          <input type="text" pInputText
+                 [value]="user?.typesPieces?.join(', ')"
+                 readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.marqueSpecialise">
+          <label>Marque spécialisée</label>
+          <input type="text" pInputText [(ngModel)]="user.marqueSpecialise" readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.modeleSpecialise">
+          <label>Modèle spécialisé</label>
+          <input type="text" pInputText [(ngModel)]="user.modeleSpecialise" readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.raisonSociale">
+          <label>Raison sociale</label>
+          <input type="text" pInputText [(ngModel)]="user.raisonSociale" readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.createdAt">
+          <label>Créé le</label>
+          <input type="text" pInputText [value]="user.createdAt | date:'short'" readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.updatedAt">
+          <label>Mis à jour le</label>
+          <input type="text" pInputText [value]="user.updatedAt | date:'short'" readonly/>
+        </div>
+
+        <div class="field" *ngIf="user?.verified !== undefined">
+          <label>Vérifié</label>
+          <p-inputSwitch [(ngModel)]="user.verified" [disabled]="true"></p-inputSwitch>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <button pButton label="Fermer" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+      </ng-template>
+    </p-dialog>
+  </div>
+</div>
+
+

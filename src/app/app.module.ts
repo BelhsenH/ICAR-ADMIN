@@ -1,0 +1,52 @@
+import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {AppComponent} from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppLayoutModule} from './layout/app.layout.module';
+import {NotfoundComponent} from './demo/components/notfound/notfound.component';
+import {ProductService} from './demo/service/product.service';
+import {CountryService} from './demo/service/country.service';
+import {CustomerService} from './demo/service/customer.service';
+import {EventService} from './demo/service/event.service';
+import {IconService} from './demo/service/icon.service';
+import {NodeService} from './demo/service/node.service';
+import {PhotoService} from './demo/service/photo.service';
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthenticationInterceptor} from "./shared/interceptors/authentication.interceptor";
+import {ToastModule} from "primeng/toast";
+import {KeycloakService} from "./core/auth/keycloak.service";
+import {environment} from "../environments/environment";
+
+export function initializeKeycloak(keycloakService: KeycloakService): () => Promise<boolean> {
+  return () =>
+    keycloakService.initKeycloak({
+      url: environment.keycloak.url,
+      realm: environment.keycloak.realm,
+      clientId: environment.keycloak.client_id
+    }).catch((err) => {
+      console.error('Keycloak initialization failed:', err);
+      return false;
+    });
+}
+
+@NgModule({
+  declarations: [
+    AppComponent, NotfoundComponent
+  ],
+  imports: [
+    AppRoutingModule,
+    AppLayoutModule,
+    ToastModule
+  ],
+  providers: [
+    KeycloakService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {provide: APP_INITIALIZER, useFactory: initializeKeycloak, deps: [KeycloakService], multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
+    CountryService, CustomerService, EventService, IconService, NodeService,
+    PhotoService, ProductService,
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+}

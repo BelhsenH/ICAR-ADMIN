@@ -1,0 +1,73 @@
+export interface IVerification {
+  emailVerified: boolean;
+  identityVerified: boolean;
+  bankAccountVerified: boolean;
+  identityVerification: IdentityVerification;
+}
+
+export interface IdentityVerification {
+  status: VerificationStatus;
+  identityDocument: VerificationDocument;
+  proofOfAddressDocument: VerificationDocument;
+  personalPhoto: VerificationFile;
+  selfieWithIdImage: VerificationFile;
+}
+
+export interface VerificationDocument {
+  front: VerificationFile;
+  back?: VerificationFile;
+  identityDocumentType?: IdentityDocumentType;
+  proofOfAddressDocumentType?: ProofOfAddressDocumentType;
+}
+
+export interface VerificationFile {
+  id: string;
+  content: string;
+  type: VerificationFileType;
+  error?: VerificationFileError;
+  valid: boolean;
+}
+
+export enum IdentityDocumentType {
+  PASSPORT = 'PASSPORT',
+  ID_CARD = 'ID_CARD',
+  DRIVING_LICENSE = 'DRIVING_LICENSE'
+}
+
+export enum ProofOfAddressDocumentType {
+  ELECTRICITY_BILL = 'ELECTRICITY_BILL',
+  LANDLINE_TELEPHONE_BILL = 'LANDLINE_TELEPHONE_BILL',
+  OTHER = 'OTHER'
+}
+
+export enum VerificationStatus {
+  UNVERIFIED = 'UNVERIFIED',
+  PENDING = 'PENDING',
+  VERIFIED = 'VERIFIED'
+}
+
+export enum VerificationFileType {
+  IMAGE = 'IMAGE',
+  PDF = 'PDF'
+}
+
+export enum VerificationFileError {
+  VERIFICATION_FILE_CORRUPT = 'VERIFICATION_FILE_CORRUPT',
+  VERIFICATION_FILE_INCOMPLETE = 'VERIFICATION_FILE_INCOMPLETE',
+  VERIFICATION_FILE_NOT_READABLE = 'VERIFICATION_FILE_NOT_READABLE',
+  VERIFICATION_FILE_NOT_SIGNED = 'VERIFICATION_FILE_NOT_SIGNED',
+  VERIFICATION_FILE_MISSING_BACK = 'VERIFICATION_FILE_MISSING_BACK',
+  VERIFICATION_FILE_MISSING_FRONT = 'VERIFICATION_FILE_MISSING_FRONT',
+  VERIFICATION_FILE_TOO_LARGE = 'VERIFICATION_FILE_TOO_LARGE',
+  VERIFICATION_FILE_COUNTRY_NOT_SUPPORTED = 'VERIFICATION_FILE_COUNTRY_NOT_SUPPORTED',
+  VERIFICATION_FILE_INVALID = 'VERIFICATION_FILE_INVALID',
+  VERIFICATION_FILE_TYPE_NOT_SUPPORTED = 'VERIFICATION_FILE_TYPE_NOT_SUPPORTED',
+  VERIFICATION_FAILED_KEYED_IDENTITY = 'VERIFICATION_FAILED_KEYED_IDENTITY',
+  VERIFICATION_FILE_NAME_MISMATCH = 'VERIFICATION_FILE_NAME_MISMATCH',
+  VERIFICATION_FILE_DOB_MISMATCH = 'VERIFICATION_FILE_DOB_MISMATCH',
+  VERIFICATION_FILE_ADDRESS_MISMATCH = 'VERIFICATION_FILE_ADDRESS_MISMATCH',
+  VERIFICATION_FILE_ID_NUMBER_MISMATCH = 'VERIFICATION_FILE_ID_NUMBER_MISMATCH',
+  VERIFICATION_FILE_PHOTO_MISMATCH = 'VERIFICATION_FILE_PHOTO_MISMATCH',
+  VERIFICATION_FILE_IBAN_MISMATCH = 'VERIFICATION_FILE_IBAN_MISMATCH',
+  VERIFICATION_FILE_CODE_BIC_MISMATCH = 'VERIFICATION_FILE_CODE_BIC_MISMATCH',
+}

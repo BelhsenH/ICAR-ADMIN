@@ -1,0 +1,206 @@
+<ul *ngFor="let account of bankAccounts" class="list-none p-0 m-0">
+  <div style="border: 0.2rem solid darkgray;border-radius: 0.5rem; margin-bottom: 0.4rem;">
+    <div class="grid">
+      <div class="col-5">
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Type</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ account.type }}
+          </div>
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Last4</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ account.last4 }}
+          </div>
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap"
+            *ngIf="account.bicCode">
+          <div class="text-500 w-6 md:w-4 font-medium">Bic code</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ account.bicCode }}
+          </div>
+        </li>
+
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap"
+            *ngIf="account.routingNumber">
+          <div class="text-500 w-6 md:w-4 font-medium">Routing number</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ account.routingNumber }}
+          </div>
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Bank name</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ account.bankName }}
+          </div>
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Owner name</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ account.accountHolderName }}
+          </div>
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Owner type</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ account.accountHolderType }}
+          </div>
+        </li>
+
+      </div>
+
+      <div class="col-5">
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Country</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ account.country }}
+          </div>
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Currency</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ account.currency }}
+          </div>
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Default for currency</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+            {{ account.defaultForCurrency ? 'yes' : 'No' }}
+          </div>
+        </li>
+
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Status</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ account.status }}
+          </div>
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Verification file</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+            {{ ((account.verification.verificationFile) ? 'Provided' : 'Not Provided') }}
+          </div>
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+          <div class="text-500 w-6 md:w-4 font-medium">Verification</div>
+          <div
+            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+            {{ account.verification.status }}
+          </div>
+        </li>
+
+      </div>
+      <div class="col-2" *ngIf="account.verification.status === 'PENDING'">
+        <button style="margin-top: 1rem;" pButton pRipple icon="pi pi-users"
+                pTooltip="Review"
+                class="p-button-rounded p-button-warning ml-2"
+                (click)="openReviewDialog(account)"></button>
+      </div>
+    </div>
+  </div>
+</ul>
+
+
+<p-dialog [(visible)]="reviewDialog && bankAccountToReview" [style]="{width: '90%'}" header="Bank account review"
+          [modal]="true" class="p-fluid" (onHide)="closeReviewDialog()">
+
+  <div class="card">
+
+    <h5>Update verification</h5>
+
+    <p-dropdown id="verification-dropdown"
+                [options]="availableStatus"
+                placeholder="Select"
+                [(ngModel)]="status"></p-dropdown>
+
+  </div>
+
+  <div class="card">
+
+    <h5>Verification file</h5>
+
+    <p *ngIf="!file">No verification file provided</p>
+
+
+    <div class="grid" *ngIf="file">
+
+      <div class="md:col-6">
+
+        <p-image
+          *ngIf="file.type === VerificationFileType.IMAGE"
+          [src]="fileService.getUserFileUrl(file.content)"
+          alt="Image"
+          width="300" [preview]="true"></p-image>
+
+        <div
+          *ngIf="file.type === VerificationFileType.PDF">
+          <i class="pi pi-search-plus" style="font-size: 1.3rem;
+                  cursor: pointer;
+                  color: #ed0769;
+                  margin-bottom: 6px;"
+             (click)="openPdfDialog(file.content)"></i>
+          <pdf-viewer
+            [src]="fileService.getUserFileUrl(file.content)"
+            [render-text]="true" [original-size]="false"
+            style="width: 400px; height: 500px"></pdf-viewer>
+        </div>
+
+      </div>
+
+      <div class="md:col-6">
+        <div style="display: flex;align-items: center; gap:10px;" class="mb-4 mt-4">
+          <label for="personal-photo-validation">Is file valid</label>
+          <p-inputSwitch id="personal-photo-validation"
+                         (onChange)="handleValidChange($event)"
+                         [(ngModel)]="file.valid"></p-inputSwitch>
+        </div>
+
+        <label for="personal-photo-reason" class="mt-5">Select reason if not valid</label>
+        <p-dropdown id="personal-photo-reason"
+                    [disabled]="file.valid"
+                    [options]="verificationFileErrors"
+                    placeholder="Select a reason"
+                    [(ngModel)]="verificationError"></p-dropdown>
+      </div>
+
+
+    </div>
+
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+            (click)="closeReviewDialog()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text"
+            (click)="updateReview()"></button>
+  </ng-template>
+
+</p-dialog>
+
+
+<p-dialog [(visible)]="pdfPreviewDialog && selectedPdfUrl" [style]="{width: '95%'}" header="Preview pdf file"
+          [modal]="true"
+          class="p-fluid" (onHide)="closePdfDialog()">
+  <div class="card">
+    <pdf-viewer [src]="selectedPdfUrl!" [fit-to-page]="false" style="width:100%; height: 450px;"
+                [render-text]="true"
+                [original-size]="true"></pdf-viewer>
+  </div>
+
+
+</p-dialog>

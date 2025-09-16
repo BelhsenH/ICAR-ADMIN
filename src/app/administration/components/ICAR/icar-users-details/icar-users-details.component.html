@@ -1,0 +1,128 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card px-6 py-6">
+      <p-toast></p-toast>
+      <!--<p-toolbar styleClass="mb-4">
+        <ng-template #toolBar pTemplate="left">
+          <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2"
+                  (click)="openNew()"></button>
+        </ng-template>
+      </p-toolbar>
+      -->
+
+      <p-table #dt [value]="cars" [rows]="10"
+               [paginator]="true"
+               [rowsPerPageOptions]="[10,20,30]"
+               [showCurrentPageReport]="true"
+               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+               [globalFilterFields]="['marque','modele','numeroImmatriculation','fuelType']"
+               responsiveLayout="scroll"
+               dataKey="_id">
+
+        <ng-template pTemplate="caption">
+          <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+            <h5 class="m-0">User Vehicles</h5>
+            <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."/>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="marque">Marque
+              <p-sortIcon field="marque"></p-sortIcon>
+            </th>
+            <th pSortableColumn="modele">Modèle
+              <p-sortIcon field="modele"></p-sortIcon>
+            </th>
+            <th pSortableColumn="numeroImmatriculation">Immatriculation
+              <p-sortIcon field="numeroImmatriculation"></p-sortIcon>
+            </th>
+            <th pSortableColumn="fuelType">Carburant
+              <p-sortIcon field="fuelType"></p-sortIcon>
+            </th>
+            <th pSortableColumn="datePremiereMiseEnCirculation">Mise en circulation
+              <p-sortIcon field="datePremiereMiseEnCirculation"></p-sortIcon>
+            </th>
+            <th pSortableColumn="kilometrage">Kilométrage
+              <p-sortIcon field="kilometrage"></p-sortIcon>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-car>
+          <tr>
+            <td>{{ car.marque }}</td>
+            <td>{{ car.modele }}</td>
+            <td>{{ car.numeroImmatriculation }}</td>
+            <td>{{ car.fuelType }}</td>
+            <td>{{ car.datePremiereMiseEnCirculation | date: 'yyyy-MM-dd' }}</td>
+            <td>{{ car.kilometrage | number }}</td>
+            <td>
+              <div class="flex justify-content-center">
+                <p-menu #menu [model]="items" [popup]="true" appendTo="body"></p-menu>
+                <button pButton pRipple icon="pi pi-ellipsis-h" class="p-button-rounded p-button-success"
+                        (click)="updateMenuItems(car); menu.toggle($event)">
+                </button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <p-dialog [(visible)]="carDialog" [style]="{width: '60%'}" header="Car Details" [modal]="true" class="p-fluid">
+      <ng-template pTemplate="content">
+
+        <div class="field" *ngIf="car.vin">
+          <label>VIN</label>
+          <input type="text" pInputText [(ngModel)]="car.vin" readonly/>
+        </div>
+        <div class="field" *ngIf="car.marque">
+          <label>Marque</label>
+          <input type="text" pInputText [(ngModel)]="car.marque" readonly/>
+        </div>
+
+        <div class="field" *ngIf="car.modele">
+          <label>Modèle</label>
+          <input type="text" pInputText [(ngModel)]="car.modele" readonly/>
+        </div>
+
+        <div class="field" *ngIf="car.numeroImmatriculation">
+          <label>Numéro d'immatriculation</label>
+          <input type="text" pInputText [(ngModel)]="car.numeroImmatriculation" readonly/>
+        </div>
+
+        <div class="field" *ngIf="car.immatriculationType">
+          <label>Type d'immatriculation</label>
+          <input type="text" pInputText [(ngModel)]="car.immatriculationType" readonly/>
+        </div>
+
+        <div class="field" *ngIf="car.fuelType">
+          <label>Carburant</label>
+          <input type="text" pInputText [(ngModel)]="car.fuelType" readonly/>
+        </div>
+
+        <div class="field" *ngIf="car.datePremiereMiseEnCirculation">
+          <label>Date première mise en circulation</label>
+          <input type="text" pInputText [value]="car.datePremiereMiseEnCirculation | date:'yyyy-MM-dd'" readonly/>
+        </div>
+
+        <div class="field" *ngIf="car.kilometrage">
+          <label>Kilométrage</label>
+          <input type="number" pInputText [(ngModel)]="car.kilometrage" readonly/>
+        </div>
+
+        <div class="field" *ngIf="car.kilometerageUnit">
+          <label>kilométerage Unité</label>
+          <input type="text" pInputText [(ngModel)]="car.kilometerageUnit" readonly/>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <button pButton label="Close" icon="pi pi-times" (click)="hideDialog()"></button>
+      </ng-template>
+    </p-dialog>
+  </div>
+</div>

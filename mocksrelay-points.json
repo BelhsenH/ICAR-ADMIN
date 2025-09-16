@@ -1,0 +1,456 @@
+{
+ "body":{
+  "data":{
+    "content": [
+      {
+        "id": "laboris",
+        "name": "pariatur non consectetur incididunt voluptate",
+        "type": "IN_TRAIN_STATION",
+        "country": {
+          "id": "nostrud qui",
+          "name": "magna reprehenderit nulla",
+          "alpha2Code": "nostrud in",
+          "alpha3Code": "id magna exercitation esse laboris",
+          "numericCode": "sed quis"
+        },
+        "city": {
+          "id": "aliquip non cillum sed mollit",
+          "countryCode": "veniam in",
+          "name": "amet sit dolor fugiat laborum"
+        },
+        "hoursOfOperation": {
+          "monday": {
+            "closed": true,
+            "morningPeriod": {
+              "closed": true,
+              "openingTime": 1688548107,
+              "closureTime": 1688548107
+            },
+            "eveningPeriod": {
+              "closed": true,
+              "openingTime": 1688548107,
+              "closureTime": 1688548107
+            }
+          },
+          "tuesday": {
+            "closed": true,
+            "morningPeriod": {
+              "closed": false,
+              "openingTime": -66886479.94265206,
+              "closureTime": -13937203.172248796
+            },
+            "eveningPeriod": {
+              "closed": false,
+              "openingTime": -47261260.1527286,
+              "closureTime": 66540376.11523491
+            }
+          },
+          "wednesday": {
+            "closed": true,
+            "morningPeriod": {
+              "closed": true,
+              "openingTime": 96968125.15086532,
+              "closureTime": 66019936.18219656
+            },
+            "eveningPeriod": {
+              "closed": false,
+              "openingTime": -51199733.34036039,
+              "closureTime": -7362099.430041
+            }
+          },
+          "thursday": {
+            "closed": true,
+            "morningPeriod": {
+              "closed": false,
+              "openingTime": 9537745.73302275,
+              "closureTime": 32340769.973938733
+            },
+            "eveningPeriod": {
+              "closed": false,
+              "openingTime": -10620960.292096809,
+              "closureTime": 27073399.06840445
+            }
+          },
+          "friday": {
+            "closed": true,
+            "morningPeriod": {
+              "closed": true,
+              "openingTime": -74971889.94840997,
+              "closureTime": 78448038.66419142
+            },
+            "eveningPeriod": {
+              "closed": false,
+              "openingTime": 40814711.346238166,
+              "closureTime": -35947599.4899086
+            }
+          },
+          "saturday": {
+            "closed": false,
+            "morningPeriod": {
+              "closed": false,
+              "openingTime": "1688548107",
+              "closureTime": "1688548107"
+            },
+            "eveningPeriod": {
+              "closed": true,
+              "openingTime": "1688548107",
+              "closureTime": "1688548107"
+            }
+          },
+          "sunday": {
+            "closed": false,
+            "morningPeriod": {
+              "closed": false,
+              "openingTime": -48545188.1985647,
+              "closureTime": 18419926.48500055
+            },
+            "eveningPeriod": {
+              "closed": false,
+              "openingTime": 1477937.8011158258,
+              "closureTime": -70421802.43794398
+            }
+          }
+        },
+        "enabled": false,
+        "airport": {
+          "id": "fugiat cupidatat consequat eiusmod",
+          "name": "pariatur mollit",
+          "iata": "culpa in do occaecat eiusmod",
+          "city": {
+            "id": "aute proident",
+            "countryCode": "cupidatat proident nulla",
+            "name": "labore cupidatat dolor"
+          }
+        },
+        "suspension": {
+          "disablerAdminId": "cupidatat",
+          "suspensionReason": "OTHER",
+          "suspensionDate": 38444556.13102263,
+          "comment": "sunt ut veniam cillum in"
+        },
+        "position": {
+          "address": "enim",
+          "longitude": 79285504.75352544,
+          "latitude": -85400060.73486683
+        },
+        "trainStation": {
+          "id": "ipsum commodo",
+          "name": "laboris irure",
+          "city": {
+            "id": "cillum",
+            "countryCode": "dolor",
+            "name": "deserunt mollit ut"
+          }
+        }
+      },
+      {
+        "id": "sit officia tempor ullamco",
+        "name": "anim cillum",
+        "type": "IN_AIRPORT",
+        "country": {
+          "id": "in incididunt",
+          "name": "nulla id in culpa nostrud",
+          "alpha2Code": "anim",
+          "alpha3Code": "mollit nisi officia",
+          "numericCode": "Duis"
+        },
+        "city": {
+          "id": "ut magna Ut ipsum consequat",
+          "countryCode": "nulla",
+          "name": "nulla cupidatat sit id deserunt"
+        },
+        "hoursOfOperation": {
+          "monday": {
+            "closed": false,
+            "morningPeriod": {
+              "closed": true,
+              "openingTime": -14201724.488797441,
+              "closureTime": -55226214.856140256
+            }
+          },
+          "tuesday": {
+            "closed": true
+          },
+          "wednesday": {
+            "closed": true
+          },
+          "thursday": {
+            "closed": true
+          },
+          "friday": {
+            "closed": true
+          },
+          "saturday": {
+            "closed": true
+          },
+          "sunday": {
+            "closed": true
+          }
+        },
+        "enabled": false,
+        "position": {
+          "address": "magna ut irure",
+          "longitude": 7192438.643802211,
+          "latitude": -96627564.53136669
+        },
+        "trainStation": {
+          "id": "cupidatat minim enim dolore",
+          "name": "aute in culpa",
+          "city": {
+            "id": "non deserunt",
+            "countryCode": "in reprehenderit",
+            "name": "reprehenderit minim"
+          }
+        },
+        "suspension": {
+          "disablerAdminId": "enim magna",
+          "suspensionReason": "OTHER",
+          "suspensionDate": -90910600.07125717,
+          "comment": "id"
+        },
+        "airport": {
+          "id": "et adipisicing ullamco ut ut",
+          "name": "tempor laboris Duis sunt",
+          "iata": "dolore velit irure cillum fugiat",
+          "city": {
+            "id": "consectetur Duis tempor",
+            "countryCode": "cupidatat minim adipisicing",
+            "name": "ea anim"
+          }
+        }
+      },
+      {
+        "id": "exercitation elit",
+        "name": "ea consectetur reprehenderit officia aute",
+        "type": "IN_AIRPORT",
+        "country": {
+          "id": "eu do Duis esse pariatur",
+          "name": "tempor non officia",
+          "alpha2Code": "in occaecat",
+          "alpha3Code": "veniam",
+          "numericCode": "ad et sint ullamco"
+        },
+        "city": {
+          "id": "enim esse ex deserunt elit",
+          "countryCode": "dolore quis dolor nostrud",
+          "name": "fugiat eiusmod tempor veniam ut"
+        },
+        "hoursOfOperation": {
+          "monday": {
+            "closed": false,
+            "morningPeriod": {
+              "closed": true,
+              "openingTime": -97784930.79021673,
+              "closureTime": 76558524.26019049
+            }
+          },
+          "tuesday": {
+            "closed": true
+          },
+          "wednesday": {
+            "closed": true
+          },
+          "thursday": {
+            "closed": false
+          },
+          "friday": {
+            "closed": false
+          },
+          "saturday": {
+            "closed": false
+          },
+          "sunday": {
+            "closed": true
+          }
+        },
+        "enabled": false,
+        "airport": {
+          "id": "eu consectetur amet",
+          "name": "consequat culpa tempor",
+          "iata": "magna dolore",
+          "city": {
+            "id": "aliqua adipisicing deserunt nisi quis",
+            "countryCode": "dolor id do nostrud aliqua",
+            "name": "ullamco officia laborum nulla"
+          }
+        },
+        "position": {
+          "address": "id ad amet velit",
+          "longitude": 88588233.18566364,
+          "latitude": -16255412.706456736
+        },
+        "trainStation": {
+          "id": "aliquip reprehenderit occaecat esse Lorem",
+          "name": "consectetur elit in laborum consequat",
+          "city": {
+            "id": "commodo Ut in",
+            "countryCode": "pariatur ex irure in",
+            "name": "in"
+          }
+        },
+        "suspension": {
+          "disablerAdminId": "esse ipsum mollit dolor fugiat",
+          "suspensionReason": "OTHER",
+          "suspensionDate": -53897398.7043438,
+          "comment": "elit"
+        }
+      },
+      {
+        "id": "aute non cillum nostrud consectetur",
+        "name": "irure culpa labore amet sit",
+        "type": "IN_AIRPORT",
+        "country": {
+          "id": "fugiat",
+          "name": "dolor labore",
+          "alpha2Code": "nisi voluptate",
+          "alpha3Code": "culpa aliqua esse",
+          "numericCode": "esse commodo"
+        },
+        "city": {
+          "id": "veniam dolore aliqua aliquip",
+          "countryCode": "sed sint qui aliquip nisi",
+          "name": "aliqua"
+        },
+        "hoursOfOperation": {
+          "monday": {
+            "closed": false,
+            "morningPeriod": {
+              "closed": false,
+              "openingTime": -9486377.740273207,
+              "closureTime": -50820013.18952916
+            }
+          },
+          "tuesday": {
+            "closed": false
+          },
+          "wednesday": {
+            "closed": false
+          },
+          "thursday": {
+            "closed": true
+          },
+          "friday": {
+            "closed": false
+          },
+          "saturday": {
+            "closed": true
+          },
+          "sunday": {
+            "closed": true
+          }
+        },
+        "enabled": false,
+        "position": {
+          "address": "in ad pariatur",
+          "longitude": -67516739.36463614,
+          "latitude": 78034254.60945168
+        },
+        "suspension": {
+          "disablerAdminId": "nulla laboris",
+          "suspensionReason": "OTHER",
+          "suspensionDate": 59087912.86325976,
+          "comment": "mollit reprehenderit enim"
+        },
+        "trainStation": {
+          "id": "Duis nisi veniam tempor ad",
+          "name": "dolor minim commodo labore Ut",
+          "city": {
+            "id": "amet Lorem culpa",
+            "countryCode": "in Duis",
+            "name": "in aliqua ad culpa adipisicing"
+          }
+        },
+        "airport": {
+          "id": "Excepteur sed",
+          "name": "velit veniam",
+          "iata": "amet deserunt",
+          "city": {
+            "id": "irure nostrud consectetur aute Lorem",
+            "countryCode": "culpa est",
+            "name": "non"
+          }
+        }
+      },
+      {
+        "id": "cillum",
+        "name": "amet ad cillum",
+        "type": "IN_TRAIN_STATION",
+        "country": {
+          "id": "quis adipisicing esse voluptate",
+          "name": "quis",
+          "alpha2Code": "dolore ipsum amet",
+          "alpha3Code": "officia",
+          "numericCode": "est veniam adipisicing"
+        },
+        "city": {
+          "id": "veniam tempor qui",
+          "countryCode": "fugiat in irure id ut",
+          "name": "proident nisi dolore"
+        },
+        "hoursOfOperation": {
+          "monday": {
+            "closed": false,
+            "morningPeriod": {
+              "closed": false,
+              "openingTime": -69422239.73080073,
+              "closureTime": -12807168.409082204
+            }
+          },
+          "tuesday": {
+            "closed": false
+          },
+          "wednesday": {
+            "closed": true
+          },
+          "thursday": {
+            "closed": true
+          },
+          "friday": {
+            "closed": false
+          },
+          "saturday": {
+            "closed": false
+          },
+          "sunday": {
+            "closed": false
+          }
+        },
+        "enabled": false,
+        "position": {
+          "address": "velit",
+          "longitude": -16499649.145083547,
+          "latitude": 88594238.7313182
+        },
+        "suspension": {
+          "disablerAdminId": "amet",
+          "suspensionReason": "OTHER",
+          "suspensionDate": 19421047.184155345,
+          "comment": "do quis id"
+        },
+        "trainStation": {
+          "id": "nostrud Duis sed ea veniam",
+          "name": "ut consequat",
+          "city": {
+            "id": "culpa sit dolor",
+            "countryCode": "aute nostrud tempor",
+            "name": "nulla aute ullamco laborum"
+          }
+        },
+        "airport": {
+          "id": "velit eiusmod ad ut",
+          "name": "eu",
+          "iata": "cupidatat ullamco et amet ex",
+          "city": {
+            "id": "dolor minim sunt",
+            "countryCode": "cupidatat anim dolore sint Excepteur",
+            "name": "enim magna"
+          }
+        }
+      }
+    ]
+
+  }
+
+ }
+
+}

@@ -1,0 +1,6 @@
+export enum PayloadType {
+  LETTER = 'LETTER',
+  PACKET = 'PACKET',
+  PRESCRIPTION = 'PRESCRIPTION',
+  PRODUCT = 'PRODUCT'
+}

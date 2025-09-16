@@ -1,0 +1,57 @@
+<div class="surface-section">
+  <!--
+      <div class="font-medium text-3xl text-900 mb-3">Offer's bookings</div>
+  -->
+  <ul *ngFor="let request of requests" class="list-none p-0 m-0">
+    <div style="border: 0.2rem solid darkgray;border-radius: 0.5rem; margin-bottom: 0.4rem;">
+      <div class="grid">
+        <div class="col-5">
+
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Departure City</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ request.departureCity.name }}
+            </div>
+
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Arrival City</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ request.arrivalCity.name }}
+            </div>
+
+          </li>
+        </div>
+        <div class="col-5">
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Start date</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ request.startDate | formatFullDate | async }}
+            </div>
+
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Expiry date</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ request.expiryDate | formatFullDate | async }}
+            </div>
+
+          </li>
+          <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-4 font-medium">Request Status</div>
+            <div
+              class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ request.status }}
+            </div>
+
+          </li>
+        </div>
+        <div class="col-2">
+          <button style="margin-top: 1rem;" pButton pRipple icon="pi pi-info-circle"
+                  pTooltip="View request details"
+                  class="p-button-rounded p-button-success ml-2"
+                  (click)="goToRequestDetails(request.id)"></button>
+        </div>
+      </div>
+    </div>
+  </ul>
+</div>

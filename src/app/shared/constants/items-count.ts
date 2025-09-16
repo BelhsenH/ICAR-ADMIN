@@ -1,0 +1,2 @@
+export const OFFERS_LIST_ITEMS_PER_PAGE = 10;
+export const REQUESTS_LIST_ITEMS_PER_PAGE = 10;

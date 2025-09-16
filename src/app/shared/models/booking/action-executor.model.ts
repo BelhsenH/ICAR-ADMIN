@@ -1,0 +1,6 @@
+export enum ActionExecutor {
+  TRANSPORTER = 'TRANSPORTER',
+  CUSTOMER = 'CUSTOMER',
+  RECEIVER = 'RECEIVER',
+  SYSTEM = 'SYSTEM'
+}

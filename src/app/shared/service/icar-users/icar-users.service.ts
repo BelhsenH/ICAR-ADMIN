@@ -32,5 +32,13 @@ export class ICarUsersService {
       .get<ICarUsers[]>(`${this.resourceUrl}/api/user/icars`, {observe: 'response'});
   }
 
+  archiveUser(id: string): Observable<any> {
+    return this.http.patch(`${this.resourceUrl}/${id}/archive`, {});
+  }
+
+  unarchiveUser(id: string): Observable<any> {
+    return this.http.patch(`${this.resourceUrl}/${id}/unarchive`, {});
+  }
+
 
 }

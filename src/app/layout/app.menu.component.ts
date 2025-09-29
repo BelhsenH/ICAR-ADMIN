@@ -37,6 +37,12 @@ export class AppMenuComponent implements OnInit {
         items: [
           {label: 'User list', icon: 'pi pi-fw pi-list', routerLink: ['/admin/ipiece-users']}
         ]
+      },
+      {
+        label: 'PROMO CODE',
+        items: [
+          {label: 'Code promo', icon: 'pi pi-fw pi-list', routerLink: ['/admin/promo-code']}
+        ]
       }
     ];
   }

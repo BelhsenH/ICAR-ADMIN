@@ -8,7 +8,7 @@ import {ToastModule} from 'primeng/toast';
 import {ToolbarModule} from 'primeng/toolbar';
 import {TableModule} from 'primeng/table';
 import {InputTextModule} from 'primeng/inputtext';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {InputSwitchModule} from 'primeng/inputswitch';
@@ -30,6 +30,8 @@ import { IrepairUsersComponent } from './components/IREPAIR/irepair-users/irepai
 import {IpieceUsersComponent} from "./components/IPIECE/ipiece-users/ipiece-users.component";
 import {MultiSelectModule} from "primeng/multiselect";
 import { IpieceUsersDetailsComponent } from './components/IPIECE/ipiece-users-details/ipiece-users-details.component';
+import {CheckboxModule} from "primeng/checkbox";
+import { PromoCodeComponent } from './components/PromoCode/promo-code/promo-code.component';
 
 @NgModule({
   imports: [
@@ -57,7 +59,9 @@ import { IpieceUsersDetailsComponent } from './components/IPIECE/ipiece-users-de
     SharedModule,
     RippleModule,
     BadgeModule,
-    MultiSelectModule
+    MultiSelectModule,
+    CheckboxModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AdministrationComponent,
@@ -65,7 +69,8 @@ import { IpieceUsersDetailsComponent } from './components/IPIECE/ipiece-users-de
     IcarUsersDetailsComponent,
     IrepairUsersComponent,
     IpieceUsersComponent,
-    IpieceUsersDetailsComponent
+    IpieceUsersDetailsComponent,
+    PromoCodeComponent
   ]
 })
 export class AdministrationModule {

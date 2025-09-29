@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IcarUsersComponent } from './icar-users.component';
+import { PromoCodeComponent } from './promo-code.component';
 
 describe('PromoCodeComponent', () => {
-  let component: IcarUsersComponent;
-  let fixture: ComponentFixture<IcarUsersComponent>;
+  let component: PromoCodeComponent;
+  let fixture: ComponentFixture<PromoCodeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IcarUsersComponent ]
+      declarations: [ PromoCodeComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(IcarUsersComponent);
+    fixture = TestBed.createComponent(PromoCodeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

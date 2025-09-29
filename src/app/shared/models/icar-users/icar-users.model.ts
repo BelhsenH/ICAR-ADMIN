@@ -10,6 +10,7 @@ export interface ICarUsers extends AuditingEntity {
   type: TYPE;
   password: string;
   verified: boolean;
+  archived?: boolean;
 }
 
 

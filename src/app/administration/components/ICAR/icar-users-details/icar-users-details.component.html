@@ -57,7 +57,7 @@
             <td>{{ car.modele }}</td>
             <td>{{ car.numeroImmatriculation }}</td>
             <td>{{ car.fuelType }}</td>
-            <td>{{ car.datePremiereMiseEnCirculation | date: 'yyyy-MM-dd' }}</td>
+            <td>{{ car.datePremiereMiseEnCirculation | date: 'dd-MM-yyyy' }}</td>
             <td>{{ car.kilometrage | number }}</td>
             <td>
               <div class="flex justify-content-center">
@@ -106,7 +106,7 @@
 
         <div class="field" *ngIf="car.datePremiereMiseEnCirculation">
           <label>Date première mise en circulation</label>
-          <input type="text" pInputText [value]="car.datePremiereMiseEnCirculation | date:'yyyy-MM-dd'" readonly/>
+          <input type="text" pInputText [value]="car.datePremiereMiseEnCirculation | date:'dd-MM-yyyy'" readonly/>
         </div>
 
         <div class="field" *ngIf="car.kilometrage">

@@ -1,0 +1,135 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card px-6 py-6">
+      <p-toolbar styleClass="mb-4">
+        <ng-template #toolBar pTemplate="left">
+          <button pButton pRipple label="Ajouter Un Nouveau Code Promo" icon="pi pi-plus" class="p-button-success mr-2"
+                  (click)="openNew()"></button>
+        </ng-template>
+      </p-toolbar>
+
+      <p-table #dt [value]="promoCodes" [columns]="cols" responsiveLayout="scroll" [rows]="10"
+               [globalFilterFields]="['code', 'assignedTo','usedCount']"
+               [paginator]="true"
+               [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+               [(selection)]="selectedCodes"
+               selectionMode="multiple" [rowHover]="true" dataKey="id">
+        <ng-template pTemplate="caption">
+          <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+            <h5 class="m-0">Manage Codes</h5>
+            <span class="block mt-2 md:mt-0 p-input-icon-left">
+                                          <span class="block mt-2 mb-3 ml-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."
+                                   class="w-full sm:w-auto"/>
+                        </span>
+                        </span>
+
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="code">Code
+              <p-sortIcon field="code"></p-sortIcon>
+            </th>
+            <th pSortableColumn="assignedTo">Utilisateur
+              <p-sortIcon field="assignedTo"></p-sortIcon>
+            </th>
+            <th pSortableColumn="usedCount">Nombre d'utilisation
+              <p-sortIcon field="usedCount"></p-sortIcon>
+            </th>
+            <th pSortableColumn="startDate">Date de début
+              <p-sortIcon field="startDate"></p-sortIcon>
+            </th>
+            <th pSortableColumn="endDate">Date de fin
+              <p-sortIcon field="endDate"></p-sortIcon>
+            </th>
+            <th pSortableColumn="status">Status
+              <p-sortIcon field="status"></p-sortIcon>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template #tableBody pTemplate="body" let-code>
+          <tr>
+            <td style="width:10%; min-width:10rem;">
+              <span class="p-column-title">Code</span>
+              {{ code.code }}
+            </td>
+
+            <td style="width:10%; min-width:8rem;">
+              <span class="p-column-title">Utilisateur</span>
+              {{ code.assignedTo }}
+            </td>
+            <td style="width:10%; min-width:10rem;">
+              <span class="p-column-title">Nombre d'utilisation</span>
+              {{ code.usedCount }}
+            </td>
+            <td style="width:10%; min-width:10rem;">
+              <span class="p-column-title">Date de début</span>
+              {{ code.startDate | date: 'dd-MM-yyyy' }}
+            </td>
+            <td style="width:10%; min-width:10rem;">
+              <span class="p-column-title">Date de fin</span>
+              {{ code.endDate | date: 'dd-MM-yyyy' }}
+            </td>
+            <td style="width:10%; min-width:10rem;">
+              <span class="p-column-title">Status</span>
+              {{ code.active ? 'Oui' : 'Non' }}
+            </td>
+            <td style="width:10%; min-width:8rem;">
+              <div class="flex justify-content-center gap-2">
+                <button pButton pRipple
+                        icon="pi pi-refresh"
+                        class="p-button-rounded p-button-info"
+                        (click)="toggleActive(code)">
+                </button>
+                <button pButton pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-warning"
+                        (click)="editCode(code)">
+                </button>
+                <button pButton pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger"
+                        (click)="deleteCode(code)">
+                </button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Nouveau Code Promo" [(visible)]="promoDialog" [modal]="true" [style]="{width: '400px'}"
+          [closable]="true" [dismissableMask]="true">
+  <form [formGroup]="promoForm" class="p-fluid">
+    <div class="field">
+      <label for="code">Code</label>
+      <input id="code" type="text" pInputText formControlName="code"/>
+    </div>
+    <div class="field">
+      <label for="assignedTo">Utilisateur</label>
+      <input id="assignedTo" type="text" pInputText formControlName="assignedTo"/>
+    </div>
+    <div class="field">
+      <label for="startDate">Date début</label>
+      <input id="startDate" type="date" pInputText formControlName="startDate"/>
+    </div>
+    <div class="field">
+      <label for="endDate">Date fin</label>
+      <input id="endDate" type="date" pInputText formControlName="endDate"/>
+    </div>
+  </form>
+
+  <p-footer>
+    <button pButton label="Annuler" icon="pi pi-times" (click)="hideDialog()" class="p-button-text"></button>
+    <button pButton label="Enregistrer" icon="pi pi-check"
+            (click)="createCode()" class="p-button-success"
+            [disabled]="promoForm.invalid"></button>
+  </p-footer>
+</p-dialog>
+

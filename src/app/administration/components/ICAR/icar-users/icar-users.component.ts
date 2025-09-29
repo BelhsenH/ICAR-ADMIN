@@ -14,17 +14,18 @@ import {Subject} from "rxjs";
 export class IcarUsersComponent implements OnInit, OnDestroy {
 
   users: Partial<ICarUsers>[] = [];
+  filteredUsers: Partial<ICarUsers>[] = [];
   user!: Partial<ICarUsers>;
   selectedUsers: Partial<ICarUsers>[] = [];
-  userDialog: boolean = false;
   items!: MenuItem[];
   submitted: boolean = false;
   cols: any[] = [];
+  showInactive: boolean = false;
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private icarUsersService: ICarUsersService,
-    private route: Router,
+    private route: Router
   ) {
   }
 
@@ -32,23 +33,29 @@ export class IcarUsersComponent implements OnInit, OnDestroy {
     this.getAllUsers();
   }
 
-  /*openNew() {
-    this.submitted = false;
-    this.route.navigateByUrl(`/admin/users/add`);
-  }*/
-
   onGlobalFilter(table: Table, event: Event) {
-    console.log((event.target as HTMLInputElement).value);
     table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
   }
 
   hideDialog() {
-    this.userDialog = false;
     this.submitted = false;
   }
 
-  updateSelectedUser(user: any) {
+  updateSelectedUser(user: Partial<ICarUsers>) {
     this.user = {...user};
+  }
+
+  filterUsers() {
+    // filtre selon le toggle
+    const filtered = this.showInactive ? this.users : this.users.filter(u => !u.archived);
+
+    // recrée une nouvelle référence de tableau pour PrimeNG
+    this.filteredUsers = [...filtered];
+  }
+
+  toggleShowInactive() {
+    this.showInactive = !this.showInactive;
+    this.filterUsers();
   }
 
   updateMenuItems(user: Partial<ICarUsers>) {
@@ -57,40 +64,56 @@ export class IcarUsersComponent implements OnInit, OnDestroy {
         label: 'Edit',
         icon: 'pi pi-user-edit',
         command: () => {
-          this.editUser(this.user._id!);
+          this.editUser(user._id!);
         },
       },
       {
         label: 'View details',
         icon: 'pi pi-user',
         command: () => {
-          this.goToUserDetails(this.user._id!);
+          this.goToUserDetails(user._id!);
         },
       },
+      {
+        label: user.archived ? 'Unarchive' : 'Archive',
+        icon: user.archived ? 'pi pi-refresh' : 'pi pi-archive',
+        command: () => {
+          user.archived ? this.unarchiveUser(user) : this.archiveUser(user);
+        },
+      }
     ];
   }
 
-  goToUserDetails(idSelected: string): void {
-    this.route.navigateByUrl(`/admin/icar-users/details/` + idSelected);
-  }
 
+  goToUserDetails(idSelected: string) {
+    this.route.navigateByUrl(`/admin/icar-users/details/${idSelected}`);
+  }
 
   editUser(idSelected: string) {
-    this.route.navigateByUrl(`/admin/users/update/` + idSelected);
+    this.route.navigateByUrl(`/admin/users/update/${idSelected}`);
   }
 
-/*
-  saveUser() {
-    this.submitted = true;
-
-  }
-*/
   getAllUsers(): void {
-    this.icarUsersService
-      .getAllUsers()
-      .subscribe((data) => {
-        this.users = data.body!;
-      });
+    this.icarUsersService.getAllUsers().subscribe((data) => {
+      this.users = data.body!;
+      this.filteredUsers = [...this.users]; // affichage initial
+      this.filterUsers(); // <--- applique le filtre initial
+
+    });
+  }
+
+  archiveUser(user: Partial<ICarUsers>) {
+    this.icarUsersService.archiveUser(user._id!).subscribe(() => {
+      user.archived = true;
+      this.filterUsers(); // rafraîchir le tableau
+    });
+  }
+
+  unarchiveUser(user: Partial<ICarUsers>) {
+    this.icarUsersService.unarchiveUser(user._id!).subscribe(() => {
+      user.archived = false;
+      this.filterUsers(); // rafraîchir le tableau
+    });
   }
 
   ngOnDestroy(): void {

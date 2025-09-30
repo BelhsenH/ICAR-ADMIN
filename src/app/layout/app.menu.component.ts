@@ -43,6 +43,14 @@ export class AppMenuComponent implements OnInit {
         items: [
           {label: 'Code promo', icon: 'pi pi-fw pi-list', routerLink: ['/admin/promo-code']}
         ]
+      },
+      {
+        label: 'Compains',
+        items: [
+          {label: 'Add', icon: 'pi pi-fw pi-list', routerLink: ['/admin/compaigns-add']},
+          {label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/admin/compaigns-list']},
+
+        ]
       }
     ];
   }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IcarUsersComponent } from './icar-users.component';
+import { CompaignsAddComponent } from './compaigns-add.component';
 
 describe('CompaignsAddComponent', () => {
-  let component: IcarUsersComponent;
-  let fixture: ComponentFixture<IcarUsersComponent>;
+  let component: CompaignsAddComponent;
+  let fixture: ComponentFixture<CompaignsAddComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IcarUsersComponent ]
+      declarations: [ CompaignsAddComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(IcarUsersComponent);
+    fixture = TestBed.createComponent(CompaignsAddComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

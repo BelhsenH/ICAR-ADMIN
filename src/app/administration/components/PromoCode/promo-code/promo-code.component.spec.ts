@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PromoCodeComponent } from './promo-code.component';
 
-describe('PromoCodeComponent', () => {
+describe('CompaignsAddComponent', () => {
   let component: PromoCodeComponent;
   let fixture: ComponentFixture<PromoCodeComponent>;
 

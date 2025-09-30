@@ -32,6 +32,9 @@ import {MultiSelectModule} from "primeng/multiselect";
 import { IpieceUsersDetailsComponent } from './components/IPIECE/ipiece-users-details/ipiece-users-details.component';
 import {CheckboxModule} from "primeng/checkbox";
 import { PromoCodeComponent } from './components/PromoCode/promo-code/promo-code.component';
+import {CampaignsAddComponent} from "./components/PromoCode/Compaigns/compains-add/compaigns-add.component";
+import {CampaignsListComponent} from "./components/PromoCode/Compaigns/compaigns-list/compaigns-list.component";
+
 
 @NgModule({
   imports: [
@@ -70,7 +73,9 @@ import { PromoCodeComponent } from './components/PromoCode/promo-code/promo-code
     IrepairUsersComponent,
     IpieceUsersComponent,
     IpieceUsersDetailsComponent,
-    PromoCodeComponent
+    PromoCodeComponent,
+    CampaignsListComponent,
+    CampaignsAddComponent
   ]
 })
 export class AdministrationModule {

@@ -1,25 +1,18 @@
-// src/app/services/user.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-export interface AllUser {
-  _id: string;
-  name: string;
-  email: string;
-  phone: string;
-  application: 'icar' | 'irepair' | 'ipiece'; // d’après ce que tu m’as dit
-}
+import {AllUserResponse} from "./all-users-response";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AllUserService {
-  private baseUrl = 'http://162.19.66.250:6892/api/user';
+  private apiUrl = 'http://162.19.66.250:6892/api/user/all-users';
 
   constructor(private http: HttpClient) {}
 
-  getAllUsers(): Observable<AllUser[]> {
-    return this.http.get<AllUser[]>(`${this.baseUrl}/all-users`);
+  // Ici le type de retour doit être AllUserResponse, pas AllUser[]
+  getUsers(): Observable<AllUserResponse> {
+    return this.http.get<AllUserResponse>(this.apiUrl);
   }
 }

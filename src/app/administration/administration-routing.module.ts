@@ -4,9 +4,8 @@ import {IcarUsersComponent} from "./components/ICAR/icar-users/icar-users.compon
 import {IcarUsersDetailsComponent} from "./components/ICAR/icar-users-details/icar-users-details.component";
 import {IrepairUsersComponent} from "./components/IREPAIR/irepair-users/irepair-users.component";
 import {IpieceUsersComponent} from "./components/IPIECE/ipiece-users/ipiece-users.component";
-import {PromoCodeComponent} from "./components/PromoCode/promo-code/promo-code.component";
-import {CampaignsListComponent} from "./components/PromoCode/Compaigns/compaigns-list/compaigns-list.component";
-import {CampaignsAddComponent} from "./components/PromoCode/Compaigns/compains-add/compaigns-add.component";
+import {PromoCodeComponent} from "./components/PromoCode/promo-code.component";
+import {AdvertisingCompanyComponent} from "./components/AdvertisingCompany/advertising-company.component";
 
 @NgModule({
   imports: [RouterModule.forChild([
@@ -15,8 +14,7 @@ import {CampaignsAddComponent} from "./components/PromoCode/Compaigns/compains-a
     {path: 'ipiece-users', component: IpieceUsersComponent},
     {path: 'irepair-users', component: IrepairUsersComponent},
     {path: 'promo-code', component: PromoCodeComponent},
-    {path: 'compaigns-add', component:CampaignsAddComponent },
-    {path: 'compaigns-list', component:CampaignsListComponent },
+    {path: 'advertising-company', component:AdvertisingCompanyComponent }
 
   ])],
   exports: [RouterModule]

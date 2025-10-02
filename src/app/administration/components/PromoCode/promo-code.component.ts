@@ -2,14 +2,16 @@ import {Component, OnInit, OnDestroy} from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {Table} from "primeng/table";
 import {Subject} from "rxjs";
-import {PromoCode} from "../../../../shared/models/promo-code/promo-code.model";
-import {PromoCodeService} from "../../../../shared/service/promo-code/promo-code.service";
+import {PromoCode} from "../../../shared/models/promo-code/promo-code.model";
+import {PromoCodeService} from "../../../shared/service/promo-code/promo-code.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-icar-users',
   templateUrl: './promo-code.component.html',
-  styleUrls: ['./promo-code.component.scss']
+  styleUrls: ['./promo-code.component.scss'],
+  providers: [MessageService]
 })
 export class PromoCodeComponent implements OnInit, OnDestroy {
   promoCodes: Partial<PromoCode>[] = [];
@@ -25,7 +27,8 @@ export class PromoCodeComponent implements OnInit, OnDestroy {
   promoForm: FormGroup;
 
   constructor(
-    private promoService: PromoCodeService, private fb: FormBuilder) {
+    private promoService: PromoCodeService, private fb: FormBuilder , private messageService: MessageService
+) {
     this.promoForm = this.fb.group({
       code: ['', Validators.required],
       assignedTo: [''],
@@ -63,26 +66,71 @@ export class PromoCodeComponent implements OnInit, OnDestroy {
 
     if (this.promo && this.promo._id) {
       // 🔄 Mise à jour
-      this.promoService.update(this.promo._id, formValue).subscribe(updated => {
-        const index = this.promoCodes.findIndex(c => c._id === updated._id);
-        if (index !== -1) this.promoCodes[index] = updated;
-        this.promoDialog = false;
+      this.promoService.update(this.promo._id, formValue).subscribe({
+        next: updated => {
+          const index = this.promoCodes.findIndex(c => c._id === updated._id);
+          if (index !== -1) this.promoCodes[index] = updated;
+          this.promoDialog = false;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Succès',
+            detail: 'Le code promo a été modifié avec succès !'
+          });
+        },
+        error: err => {
+          console.error(err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erreur',
+            detail: 'Impossible de modifier le code promo.'
+          });
+        }
       });
     } else {
       // 🆕 Création
-      this.promoService.create(formValue).subscribe(newCode => {
-        this.promoCodes.push(newCode);
-        this.promoForm.reset({ active: true, minAmount: 0, maxUses: 1 });
-        this.promoDialog = false;
+      this.promoService.create(formValue).subscribe({
+        next: newCode => {
+          this.promoCodes.push(newCode);
+          this.promoForm.reset({ active: true, minAmount: 0, maxUses: 1 });
+          this.promoDialog = false;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Succès',
+            detail: 'Le code promo a été créé avec succès !'
+          });
+        },
+        error: err => {
+          console.error(err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erreur',
+            detail: 'Impossible de créer le code promo.'
+          });
+        }
       });
     }
   }
-
   deleteCode(code: PromoCode) {
-    this.promoService.delete(code._id!).subscribe(() => {
-      this.promoCodes = this.promoCodes.filter(c => c._id !== code._id);
+    this.promoService.delete(code._id!).subscribe({
+      next: () => {
+        this.promoCodes = this.promoCodes.filter(c => c._id !== code._id);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Succès',
+          detail: 'Le code promo a été supprimé avec succès !'
+        });
+      },
+      error: err => {
+        console.error(err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erreur',
+          detail: 'Impossible de supprimer le code promo.'
+        });
+      }
     });
   }
+
 
   editCode(code: PromoCode) {
     this.promoForm.patchValue({

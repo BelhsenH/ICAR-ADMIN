@@ -19,8 +19,17 @@ export class CampaignService {
     return this.http.post<Campaign>(this.baseUrl, campaign);
   }
 
-  sendCampaign(id: string): Observable<any> {
+  sendCampaign(id: string, type: 'email' | 'sms', recipients: string[]): Observable<any> {
+    return this.http.post(`${this.baseUrl}/send/${id}`, { type, recipients });
+  }
+
+  sendEmailCampaign(id: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/send/${id}`, {});
+  }
+
+  // 🔹 Nouvelle méthode pour envoyer une campagne SMS
+  sendSMSCampaign(id: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/send-sms/${id}`, {});
   }
 
   updateCampaign(id: string, data: Partial<Campaign>): Observable<Campaign> {

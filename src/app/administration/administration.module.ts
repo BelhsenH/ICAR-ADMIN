@@ -31,9 +31,9 @@ import {IpieceUsersComponent} from "./components/IPIECE/ipiece-users/ipiece-user
 import {MultiSelectModule} from "primeng/multiselect";
 import { IpieceUsersDetailsComponent } from './components/IPIECE/ipiece-users-details/ipiece-users-details.component';
 import {CheckboxModule} from "primeng/checkbox";
-import { PromoCodeComponent } from './components/PromoCode/promo-code/promo-code.component';
-import {CampaignsAddComponent} from "./components/PromoCode/Compaigns/compains-add/compaigns-add.component";
-import {CampaignsListComponent} from "./components/PromoCode/Compaigns/compaigns-list/compaigns-list.component";
+import {AdvertisingCompanyComponent} from "./components/AdvertisingCompany/advertising-company.component";
+import {PromoCodeComponent} from "./components/PromoCode/promo-code.component";
+import {MessageService} from "primeng/api";
 
 
 @NgModule({
@@ -74,9 +74,9 @@ import {CampaignsListComponent} from "./components/PromoCode/Compaigns/compaigns
     IpieceUsersComponent,
     IpieceUsersDetailsComponent,
     PromoCodeComponent,
-    CampaignsListComponent,
-    CampaignsAddComponent
-  ]
+    AdvertisingCompanyComponent
+  ],
+  providers:[MessageService]
 })
 export class AdministrationModule {
 }

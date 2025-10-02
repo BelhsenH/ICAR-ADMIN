@@ -1,0 +1,123 @@
+<p-toast position="top-right" [baseZIndex]="10000"></p-toast>
+<div class="grid">
+  <div class="col-12">
+    <div class="card px-6 py-6">
+      <p-toolbar styleClass="mb-4">
+        <ng-template #toolBar pTemplate="left">
+          <button pButton pRipple label="Créer une campagne"
+                  icon="pi pi-plus"
+                  class="p-button-success mr-2"
+                  (click)="openNew()"></button>
+        </ng-template>
+      </p-toolbar>
+
+      <p-table #dt [value]="campaigns" [columns]="cols" responsiveLayout="scroll"
+               [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]"
+               [globalFilterFields]="['title','type','status']"
+               [showCurrentPageReport]="true"
+               currentPageReportTemplate="Affichage {first} à {last} sur {totalRecords}">
+        <ng-template pTemplate="caption">
+          <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+            <h5 class="m-0">Gestion des Campagnes</h5>
+            <span class="block mt-2 md:mt-0 p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Rechercher..."
+                     class="w-full sm:w-auto"/>
+            </span>
+          </div>
+        </ng-template>
+
+        <!-- En-tête -->
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="title">Titre <p-sortIcon field="title"></p-sortIcon></th>
+            <th pSortableColumn="type">Type <p-sortIcon field="type"></p-sortIcon></th>
+            <th pSortableColumn="status">Statut <p-sortIcon field="status"></p-sortIcon></th>
+            <th>Destinataires</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+
+        <!-- Corps -->
+        <ng-template pTemplate="body" let-campaign>
+          <tr>
+            <td>{{ campaign.title }}</td>
+            <td>{{ campaign.type }}</td>
+            <td>{{ campaign.status }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let r of campaign.recipients">{{ r }}</li>
+              </ul>
+            </td>
+            <td>
+              <div class="flex justify-content-center gap-2">
+                <button pButton icon="pi pi-send"
+                        class="p-button-rounded p-button-info"
+                        (click)="sendCampaign(campaign)">
+                </button>
+                <button pButton icon="pi pi-pencil"
+                        class="p-button-rounded p-button-warning"
+                        (click)="editCampaign(campaign)">
+                </button>
+                <button pButton icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger"
+                        (click)="deleteCampaign(campaign)">
+                </button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<!-- 🔹 Dialog pour nouvelle campagne -->
+<p-dialog header="Nouvelle Campagne" [(visible)]="campaignDialog" [modal]="true" [style]="{width: '500px'}"
+          [closable]="true" [dismissableMask]="true">
+  <form [formGroup]="form" class="p-fluid">
+    <div class="field">
+      <label for="type">Type</label>
+      <select id="type" formControlName="type" pInputText>
+        <option value="email">Email</option>
+        <option value="sms">SMS</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="title">Titre</label>
+      <input id="title" type="text" pInputText formControlName="title"/>
+    </div>
+
+    <div class="field">
+      <label for="content">Contenu</label>
+      <textarea id="content" pInputTextarea formControlName="content"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="userType">Type d'utilisateur</label>
+      <select id="userType" formControlName="userType" pInputText>
+        <option value="icar">iCar</option>
+        <option value="ipiece">iPiece</option>
+        <option value="irepair">iRepair</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Destinataires</label>
+      <select>
+        <option selected disabled>📋 Liste des utilisateurs</option>
+        <option *ngFor="let r of recipients.controls" [value]="r.value" disabled>
+          {{ r.value }}
+        </option>
+      </select>
+    </div>
+  </form>
+
+  <p-footer>
+    <button pButton label="Annuler" icon="pi pi-times" (click)="hideDialog()" class="p-button-text"></button>
+    <button pButton label="Enregistrer" icon="pi pi-check"
+            (click)="submit()" class="p-button-success"
+            [disabled]="form.invalid"></button>
+  </p-footer>
+</p-dialog>

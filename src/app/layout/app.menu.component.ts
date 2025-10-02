@@ -45,11 +45,9 @@ export class AppMenuComponent implements OnInit {
         ]
       },
       {
-        label: 'Compains',
+        label: 'Advertising Company',
         items: [
-          {label: 'Add', icon: 'pi pi-fw pi-list', routerLink: ['/admin/compaigns-add']},
-          {label: 'List', icon: 'pi pi-fw pi-list', routerLink: ['/admin/compaigns-list']},
-
+          {label: 'Add', icon: 'pi pi-fw pi-list', routerLink: ['/admin/advertising-company']},
         ]
       }
     ];
